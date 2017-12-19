@@ -1,0 +1,6 @@
+.user-output p {
+  width: 50%;
+  margin: 5px auto;
+  padding: 15px;
+  box-shadow: 0 2px 3px #ccc;
+}

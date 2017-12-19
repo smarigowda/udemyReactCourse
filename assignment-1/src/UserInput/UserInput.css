@@ -1,0 +1,7 @@
+.user-input input {
+  background-color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 12px;
+  cursor: pointer;
+}
