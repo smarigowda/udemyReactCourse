@@ -5,24 +5,24 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [ 
-      { name: 'Santosh', age: 43 },
-      { name: 'Roopa', age: 40 },
-      { name: 'Sukruthi', age: 12 }
+      { id: 'ajfjak', name: 'Santosh', age: 43 },
+      { id: 'cnbnvc', name: 'Roopa', age: 40 },
+      { id: 'wedjad', name: 'Sukruthi', age: 12 }
     ],
     otherState: 'Some other state',
     showPersons: false
   }
 
-  switchNameHandler = newName => {
-    // console.log('Was clicked!');
-    // DON'T DO THIS this.state.persons[0].name = 'Santosh Marigowda';
-    this.setState({
-      persons: [
-        { name: 'Santosh Marigowda', age: 43 },
-        { name: 'Roopa', age: 40 },
-        { name: 'Sukruthi', age: 13 }
-      ]
-    })
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(d => d.id === id);
+    const person = {
+      ...this.state.persons[personIndex]
+    }
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+    person.name = event.target.value;
+    const persons = [ ...this.state.persons];
+    persons[personIndex] = person;
+    this.setState({ persons: persons });
   }
 
   togglePersonsHandler = () => {
@@ -31,7 +31,9 @@ class App extends Component {
   }
 
   deletePersonHandler = personIndex => {
-    const persons = this.state.persons;
+    // const persons = this.state.persons; // reference to originl array
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons]; // copy of original, we do not mutate original
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
   }
@@ -52,9 +54,11 @@ class App extends Component {
           {this.state.persons.map((d, index) => {
             return (
               <Person
+                key={d.id}
                 click = { () => this.deletePersonHandler(index) }
                 name={d.name}
-                age={d.age} />
+                age={d.age} 
+                changed={ event => { this.nameChangeHandler(event, d.id) } } />
             )
           })}
           {/* <Person 
