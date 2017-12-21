@@ -55,23 +55,12 @@ class App extends Component {
             return (
               <Person
                 key={d.id}
-                click = { () => this.deletePersonHandler(index) }
+                click={ () => this.deletePersonHandler(index) }
                 name={d.name}
                 age={d.age} 
                 changed={ event => { this.nameChangeHandler(event, d.id) } } />
             )
           })}
-          {/* <Person 
-            name={ this.state.persons[0].name }
-            age={ this.state.persons[0].age }/>
-          <Person 
-            name={ this.state.persons[1].name }
-            age={ this.state.persons[1].age }
-            click={ this.switchNameHandler.bind(this, 'Santosh!') }
-            changed={ this.nameChangedHandler }>Hobbies: Reading</Person>
-          <Person 
-            name={ this.state.persons[2].name }
-            age={ this.state.persons[2].age }/> */}
         </div>
       )
     }
@@ -86,7 +75,6 @@ class App extends Component {
         {persons}
       </div>
     );
-    // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'Does it work now?'));
   }
 }
 
