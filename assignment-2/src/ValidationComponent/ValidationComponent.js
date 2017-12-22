@@ -1,18 +1,18 @@
 import React from 'react';
 
 const validationComponent = props => {
-  let output = null;
+  let message = null;
 
   if(props.charCount < 5) {
-    output = <p>Text is too short</p>
+    message = <p>Text is too short</p>
   } else if (props.charCount > 25) {
-    output = <p>Text is too long</p>
+    message = <p>Text is too long</p>
   }
 
   return (
     <div className="user-output">
       <p>Char Count = {props.charCount}</p>
-      {output}
+      {message}
     </div>
   )
 }
