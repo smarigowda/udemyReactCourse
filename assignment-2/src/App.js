@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import ValidationComponent from './ValidationComponent/ValidationComponent';
 
 class App extends Component {
   state = {
@@ -23,7 +24,7 @@ class App extends Component {
           type="text"
           onChange={ this.changeHandler }>
         </input>
-        <p className="char-count">Number of characters = <span>{this.state.charCount}</span></p>
+        <ValidationComponent charCount={this.state.charCount}></ValidationComponent>
       </div>
     );
   }
