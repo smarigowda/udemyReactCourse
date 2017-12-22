@@ -5,36 +5,29 @@ import CharComponent from './CharComponent/CharComponent';
 
 class App extends Component {
   state = {
-    charCount: 0,
-    inputArray: [],
-    inputString: '',
+    userInput: '',
   }
 
   changeHandler = event => {
-    this.state.inputString = event.target.value;
-    const strArray = event.target.value.split('');
-
     this.setState({
-      charCount: strArray.length,
-      inputArray: strArray
+      userInput: event.target.value
     })
   }
 
   charChangeHandler = (event, index) => {
-    console.log(event);
-    console.log(event.target.innerText, index);
-    const inputArray = [...this.state.inputArray];
+    const inputArray = this.state.userInput.split('');
     inputArray.splice(index, 1);
-    console.log(inputArray.join(''));
     this.setState({
-      inputArray: inputArray,
-      inputString: inputArray.join('')
+      userInput: inputArray.join('')
     })
   }
   render() {
-    const charArrayJSX = this.state.inputArray.map((d, i) => {
-      return <CharComponent key={i} char={d} index={i} remove={ event => { this.charChangeHandler(event, i)} }></CharComponent>
+    const inputArray = this.state.userInput.split('');
+    const charArrayJSX = inputArray.map((d, i) => {
+      return <CharComponent key={i} char={d} index={i} remove={event => {this.charChangeHandler(event, i)}}></CharComponent>
     });
+
+    const charCount = this.state.userInput.split('').length;
 
     return (
       <div className="App">
@@ -42,10 +35,10 @@ class App extends Component {
         <h2>this is Assignment 2</h2>
         <input
           type="text"
-          onChange={ this.changeHandler }
-          value={this.state.inputString}>
+          onChange={this.changeHandler}
+          value={this.state.userInput}>
         </input>
-        <ValidationComponent charCount={this.state.charCount}></ValidationComponent>
+        <ValidationComponent charCount={charCount}></ValidationComponent>
         {charArrayJSX}
       </div>
     );
