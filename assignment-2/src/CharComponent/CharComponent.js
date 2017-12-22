@@ -3,7 +3,7 @@ import React from 'react';
 const charComponent = props => {
   return (
     <div className="char-component">
-      <p>{props.char}</p>
+      <p onClick={props.remove}>{props.char}</p>
     </div>
   )
 }
