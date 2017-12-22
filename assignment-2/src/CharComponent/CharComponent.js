@@ -2,8 +2,8 @@ import React from 'react';
 
 const charComponent = props => {
   return (
-    <div className="char-component">
-      <p onClick={props.remove}>{props.char}</p>
+    <div className="char-component" onClick={props.remove}>
+      <p>{props.char}</p>
     </div>
   )
 }
