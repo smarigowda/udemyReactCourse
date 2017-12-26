@@ -16,7 +16,8 @@ class App extends PureComponent {
         { id: 'wedjad', name: 'Sukruthi', age: 12 }
       ],
       otherState: 'Some other state',
-      showPersons: false
+      showPersons: false,
+      toggleClicked: 0,
     }
   
     console.log('[App.js] Inside Constructor', props);
@@ -70,7 +71,14 @@ class App extends PureComponent {
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({ showPersons: !doesShow });
+    // called asynchronously
+    // prevState is immutable now, can not be altered from somewhere else
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked + 1,
+      }
+    });
   }
 
   deletePersonHandler = personIndex => {
