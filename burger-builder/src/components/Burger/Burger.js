@@ -9,8 +9,13 @@ const burger = props => {
                                            return <BurgerIngredient key={ingKey + i} type={ingKey} />
                                          });
                                        });
-  // console.log(transformedIngredients);
+  console.log(transformedIngredients);
+  // [ [x] [x, y] [x, y, z] [x] [x, y] [x, y, z, b]]
+  const flattened = transformedIngredients.reduce((arr, ele) => { 
+    return arr.concat(ele);
+  }, []);
   // debugger;
+
   return (
     <div className={classes.Burger}>
       <BurgerIngredient type="bread-top" />
