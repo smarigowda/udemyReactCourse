@@ -34,10 +34,10 @@ class Blog extends Component {
                         </ul>
                     </nav>
                 </header>
-                <Route path="/" exact component={Posts}/>
+                
                 <Switch>
-                    <Route path="/new-post" component={NewPost}/>
-                    <Route path="/:id" component={FullPost}/>
+                    <Route path="/new-post" exact component={NewPost}/>
+                    <Route path="/" component={Posts}/>
                 </Switch>
                 {/* <Route path="/" exact render={() => <h1>Home sweet home!</h1>}/> */}
                 {/* <Route path="/" render={() => <h1>Home sweet home...2!</h1>}/> */}

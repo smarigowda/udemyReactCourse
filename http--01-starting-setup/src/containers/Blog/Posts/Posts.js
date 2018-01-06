@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import axios from '../../../../src/axios';
 import Post from '../../../components/Post/Post';
+import FullPost from '../FullPost/FullPost';
 import './Posts.css'; // we are not using css modules in this project
 
 class Posts extends Component {
@@ -39,8 +40,9 @@ class Posts extends Component {
     if(!this.state.error) {
         posts = this.state.posts.map(post => {
             return (
-            // <Link to={`/${post.id}`} key={post.id}>
+            // <Link to={`/${post.id}`} >
               <Post
+                  key={post.id}
                   title={post.title}
                   author={post.author}
                   clicked={() => { this.postSelectedHandler(post.id)}}
@@ -50,9 +52,12 @@ class Posts extends Component {
         });
     }
     return (
-      <section className="Posts">
-        {posts}
-      </section>
+      <div>
+        <section className="Posts">
+          {posts}
+        </section>
+        <Route path="/:id" component={FullPost}/>
+      </div>
     )
   }
 }
