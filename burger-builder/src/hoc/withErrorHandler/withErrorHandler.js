@@ -8,14 +8,15 @@ const withErrorHandler = (WrappedComponent, axios) => {
       state = {
         error: null,
       }
-      componentDidMount = () => {
+      // componentDidMount = () => {
+      componentWillMount = () => { // runs before the child components are rendered
         axios.interceptors.request.use(req => {
           this.setState({ error: null });
           return req;
-        })
+        });
         axios.interceptors.response.use(res => res, error => {
-          this.setState({ error: error })
-        })
+          this.setState({ error: error }) // sets the error state
+        });
       }
       errorConfirmedHandler = () => {
         this.setState({error: null});
