@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 import axios from '../../../src/axios';
 import './Blog.css';
 import Posts from './Posts/Posts';
@@ -38,16 +38,11 @@ class Blog extends Component {
                 <Switch>
                     <Route path="/new-post" component={NewPost}/>
                     <Route path="/posts" component={Posts}/>
+                    <Redirect from="/" to="/posts" />
+                    {/* <Route path="/" component={Posts}/> */}
                 </Switch>
                 {/* <Route path="/" exact render={() => <h1>Home sweet home!</h1>}/> */}
                 {/* <Route path="/" render={() => <h1>Home sweet home...2!</h1>}/> */}
-                {/* <Posts /> */}
-                {/* <section>
-                    <FullPost id={this.state.selectedPostId} />
-                </section>
-                <section>
-                    <NewPost />
-                </section> */}
             </div>
         );
     }
