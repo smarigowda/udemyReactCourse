@@ -29,6 +29,7 @@ class NewPost extends Component {
     }
     componentDidMount() {
         console.log(this.props);
+        // this.props.history.replace('/posts') // if the user is not authenticated
     }
     render () {
         let redirect = null;
