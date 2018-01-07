@@ -22,7 +22,9 @@ class NewPost extends Component {
         axios.post('/posts', post)
             .then(response => {
                 console.log(response);
-                this.setState({submitted: true});
+                this.props.history.push('/posts'); // stacks the page on top, can go back to previous page
+                // this.setState({submitted: true}); // replaces the page, can not go back
+                // this.props.history.replace('/posts'); // replaces the page
             });
     }
     componentDidMount() {
@@ -31,7 +33,7 @@ class NewPost extends Component {
     render () {
         let redirect = null;
         if(this.state.submitted) {
-            redirect = <Redirect to="/posts" />;
+            redirect = <Redirect to="/posts" />; // replaces
         }
         return (
             <div className="NewPost">
