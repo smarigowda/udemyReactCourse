@@ -26,6 +26,7 @@ class BurgerBuilder extends Component {
     error: false
   }
   componentDidMount() { // has side effect
+    console.log(this.props);
     axios
       .get('https://react-my-burger-43a92.firebaseio.com/ingredients.json') // success case
       // .get('https://react-my-burger-43a92.firebaseio.com/ingredients') // error case
@@ -46,31 +47,31 @@ class BurgerBuilder extends Component {
   }
   purchaseContinueHandler = () => {
     // alert('You Continue!');
-    this.setState({loading: true});
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'Santosh Marigowda',
-        address: {
-          street: 'Beaconsfield Way',
-          postCode: 'RG6 5UR',
-          country: 'UK'
-        },
-        email: 'santosharakere@gmail.com'
-      },
-      deliveryMethod: 'fastest'
-    }
-    axios.post('/orders.json', order)
-    // axios.post('/orders', order) // error case
-      .then(response => {
-      this.setState({loading: false, purchasing: false});
-      console.log(response);
-    }).catch(error => {
-      this.setState({loading: false, purchasing: false});
-      console.log(error);
-    });
-
+    // this.setState({loading: true});
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: 'Santosh Marigowda',
+    //     address: {
+    //       street: 'Beaconsfield Way',
+    //       postCode: 'RG6 5UR',
+    //       country: 'UK'
+    //     },
+    //     email: 'santosharakere@gmail.com'
+    //   },
+    //   deliveryMethod: 'fastest'
+    // }
+    // axios.post('/orders.json', order)
+    // // axios.post('/orders', order) // error case
+    //   .then(response => {
+    //   this.setState({loading: false, purchasing: false});
+    //   console.log(response);
+    // }).catch(error => {
+    //   this.setState({loading: false, purchasing: false});
+    //   console.log(error);
+    // });
+    this.props.history.push('/checkout');
   }
   updatePurchaseState = ingredients => {
     const sum = Object
