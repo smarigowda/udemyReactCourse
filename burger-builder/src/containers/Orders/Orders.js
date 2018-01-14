@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 
+import Order from '../../components/Order/Order';
 
 class Orders extends Component {
   render() {
