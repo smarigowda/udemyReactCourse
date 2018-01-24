@@ -1,9 +1,11 @@
+import * as actionTypes from './actions';
+
 const initialState = {
   persons: []
 };
 
 const reducer = (state = initialState, action) => {
-  if (action.type === 'ADD_PERSON') {
+  if (action.type === actionTypes.ADD_PERSON) {
     const newPerson = {
       id: Math.random(), // not really unique but good enough here!
       name: 'Max',
@@ -15,7 +17,7 @@ const reducer = (state = initialState, action) => {
     }
   }
 
-  if (action.type === 'DELETE_PERSON') {
+  if (action.type === actionTypes.REMOVE_PERSON) {
     return {
       persons: state.persons.filter(person => person.id !== action.id)
     }
