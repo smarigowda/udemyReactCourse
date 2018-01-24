@@ -14,6 +14,13 @@ const reducer = (state = initialState, action) => {
       persons: newPersons
     }
   }
+
+  if (action.type === 'DELETE_PERSON') {
+    return {
+      persons: state.persons.filter(person => person.id !== action.id)
+    }
+  }
+
   return state;
 }
 
