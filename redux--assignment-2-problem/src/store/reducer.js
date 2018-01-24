@@ -13,12 +13,14 @@ const reducer = (state = initialState, action) => {
     }
     const newPersons = state.persons.concat(newPerson);
     return {
+      ...state,
       persons: newPersons
     }
   }
 
   if (action.type === actionTypes.REMOVE_PERSON) {
     return {
+      ...state,
       persons: state.persons.filter(person => person.id !== action.id)
     }
   }
