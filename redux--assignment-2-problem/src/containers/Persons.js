@@ -14,6 +14,7 @@ class Persons extends Component {
             name: 'Max',
             age: Math.floor( Math.random() * 40 )
         }
+
         this.setState( ( prevState ) => {
             return { persons: prevState.persons.concat(newPerson)}
         } );
@@ -28,8 +29,8 @@ class Persons extends Component {
     render () {
         return (
             <div>
-                <AddPerson personAdded={this.personAddedHandler} />
-                {this.state.persons.map(person => (
+                <AddPerson personAdded={this.props.onAddPerson} />
+                {this.props.persons.map(person => (
                     <Person 
                         key={person.id}
                         name={person.name} 
@@ -41,4 +42,17 @@ class Persons extends Component {
     }
 }
 
-export default Persons;
+const mapStateToProps = state => {
+    return {
+        persons: state.persons
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddPerson: () => {
+            return dispatch({type: 'ADD_PERSON'});
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Persons);
