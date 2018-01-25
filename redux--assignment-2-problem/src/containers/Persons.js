@@ -29,8 +29,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddPerson: () => {
-            return dispatch({ type: actionTypes.ADD_PERSON });
+        onAddPerson: (name, age) => {
+            return dispatch({ type: actionTypes.ADD_PERSON, payload: { name: name, age: age } });
         },
         onDeletePerson: id => {
             return dispatch({ type: actionTypes.REMOVE_PERSON, id: id });
