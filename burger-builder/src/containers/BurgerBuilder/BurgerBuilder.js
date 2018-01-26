@@ -27,17 +27,17 @@ class BurgerBuilder extends Component {
   }
   componentDidMount() { // has side effect
     console.log(this.props);
-    axios
-      .get('https://react-my-burger-43a92.firebaseio.com/ingredients.json') // success case
-      // .get('https://react-my-burger-43a92.firebaseio.com/ingredients') // error case
-      .then(response => {
-        console.log(`ingredients state: ${JSON.stringify(response)}`);
-        this.setState({ingredients: response.data});
-      })
-      .catch(error => {
-        console.log(error);
-        this.setState({ error: true });
-      });
+    // axios
+    //   .get('https://react-my-burger-43a92.firebaseio.com/ingredients.json') // success case
+    //   // .get('https://react-my-burger-43a92.firebaseio.com/ingredients') // error case
+    //   .then(response => {
+    //     console.log(`ingredients state: ${JSON.stringify(response)}`);
+    //     this.setState({ingredients: response.data});
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //     this.setState({ error: true });
+    //   });
   }
   purchaseHandler = () => {
     this.setState({purchasing: true});
