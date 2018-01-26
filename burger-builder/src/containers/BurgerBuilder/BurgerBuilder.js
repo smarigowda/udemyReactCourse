@@ -13,8 +13,9 @@ import * as actionTypes from '../../store/actions';
 
 class BurgerBuilder extends Component {
   // constructor(props) {   super(props) {     this.state = {...}   } }
+
+  // UI only state, no need to manage them by redux
   state = {
-    purchasable: false,
     purchasing: false,
     loading: false,
     error: false
@@ -59,10 +60,9 @@ class BurgerBuilder extends Component {
       .map(key => {
         return ingredients[key];
       })
-      .reduce((sum, el) => sum + el, 0)
-    this.setState({
-      purchasable: sum > 0
-    });
+      .reduce((sum, el) => sum + el, 0);
+
+    return sum > 0;
   }
   // addIngredientHandler = type => {
   //   const oldCount = this.state.ingredients[type];
@@ -113,7 +113,7 @@ class BurgerBuilder extends Component {
             ingredientsRemoved={this.props.onIngredientRemoved}
             disabled={disabledInfo}
             price={this.props.totalPrice}
-            purchasable={this.state.purchasable}
+            purchasable={this.updatePurchaseState(this.props.ingredients)}
             ordered={this.purchaseHandler}/>
         </Aux>
       );
