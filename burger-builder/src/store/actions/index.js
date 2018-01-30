@@ -6,4 +6,4 @@ export {
 
 export * from './actionTypes';
 
-export { purchaseBurger } from './order.js';
+export { purchaseBurger, purchaseInit } from './order.js';
