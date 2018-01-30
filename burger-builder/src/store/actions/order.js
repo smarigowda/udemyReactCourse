@@ -19,7 +19,6 @@ export const purchaseBurgerFail = error => {
 export const purchaseBurgerStart = () => {
   return {
     type: actionTypes.PURCHASE_BURGER_START,
-
   }
 }
 
@@ -31,7 +30,7 @@ export const purchaseBurger = orderData => {
     // axios.post('/orders', orderData) // error scenario
     .then(response => {
       console.log(response);
-      dispatch(purchaseBurgerSuccess(response.data, orderData))
+      dispatch(purchaseBurgerSuccess(response.data.name, orderData))
       // this.setState({loading: false});
       // this.props.history.push('/');
     }).catch(error => {
