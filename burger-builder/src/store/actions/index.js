@@ -9,4 +9,8 @@ export * from './actionTypes';
 export { 
   purchaseBurger,
   purchaseInit,
-  fetchOrders } from './order.js';
+  fetchOrders } from './order';
+
+export {
+  auth,
+} from './auth';
