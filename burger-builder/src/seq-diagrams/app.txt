@@ -1,16 +1,21 @@
 @startuml
-alt success case
+alt not signed in
 "Home (not signed)" --> "Sign In Page" : "click on 'Sign In to Order'"
-"Sign In Page" --> "Checkout Page (signed) Burger Image" : "Sign in Success"
-"Home (signed)" --> "Order Details Modal" : "Click on Order Now"
-"Order Details Modal" ---> "Home (signed)" : "Click on Cancel"
-"Order Details Modal" ---> "Checkout Page (signed) Burger Image" : "Click on Continue"
-"Checkout Page (signed) Burger Image" ---> "Checkout Page (signed) + Contact Data Form" : " Click on Continue"
+"Sign In Page" --> "Checkout Page (signed)" : "Sign in Success"
+"Checkout Page (signed)" ---> "Checkout Page (signed) + Contact Data Form" : " Click on Continue"
 "Checkout Page (signed) + Contact Data Form" ---> "Home (signed)" : "Fill in details and Click on Order"
-"Checkout Page (signed) Burger Image" ---> "Home (not signed)": "Click on Logout"
-"Checkout Page (signed) Burger Image" ---> "Home (signed)" : "Click on Burger Builder -- ingredients are reset (issue)"
+end
+alt signed in
+"Home (signed)" --> "Order Details Modal" : "Click on Order Now"
+"Order Details Modal" ---> "Checkout Page (signed)" : "Click on Continue"
+end
+alt other cases
 "Home (signed)" --> "Home (not signed)" : "Click on Logout"
-else failure case
+"Order Details Modal" ---> "Home (signed)" : "Click on Cancel"
+"Checkout Page (signed)" ---> "Home (not signed)": "Click on Logout"
+"Checkout Page (signed)" ---> "Home (signed)" : "Click on Burger Builder -- ingredients are reset (issue)"
+end
+alt failure case
 "Checkout Page (signed) + Contact Data Form" ---> "Failure Message" : "network failure"
 end
 @enduml
