@@ -49,6 +49,14 @@ class Auth extends Component {
       }
     })
   }
+  // commented because building = false and authRedirectPath !== '/' is not be possible.
+  // componentDidMount() {
+  //   debugger;
+  //   if (!this.props.building && this.props.authRedirectPath !== '/') {
+  //     // home -> add ing -> Sign In -> Logout -> Sign In ? 
+  //     this.props.setAuthRedirectPath('/');
+  //   }
+  // }
   checkValidity = (value, rules) => {
     let isValid = true;
     // resiliency
@@ -107,7 +115,7 @@ class Auth extends Component {
     ));
     if(this.props.loading) {
       form = <Spinner />;
-    }
+      }
     let errorMessage = null;
     if(this.props.error) {
       errorMessage = (
@@ -115,8 +123,12 @@ class Auth extends Component {
       )
     }
     let authRedirect = null;
-    if (this.props.isAuthenticated) {
-      authRedirect = <Redirect to="/" />
+    if (this.props.token !== null) { // component is re-rendered when token (one of auth state) is updated
+      console.log('[Auth container] user is authenticated, redirecting to', this.props.authRedirectPath);
+      authRedirect = <Redirect to={this.props.authRedirectPath} />
+    } else {
+      console.log('---- token ---', this.props.token);
+      console.log('[Auth container] user is not yet authenticated')
     }
     return (
       <div className={classes.Auth}>
@@ -133,14 +145,17 @@ class Auth extends Component {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp))
+    onAuth: (email, password, isSignUp) => dispatch(actions.auth(email, password, isSignUp)),
+    // setAuthRedirectPath: path => dispatch(actions.setAuthRedirectPath(path)),
   }
 }
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
-    isAuthenticated: state.auth.token !== null,
+    token: state.auth.token,
+    building: state.burgerBuilder.building,
+    authRedirectPath: state.auth.authRedirectPath,
   }
 }
 
