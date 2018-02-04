@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Layout from './hoc/Layout/Layout';
@@ -25,26 +25,29 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          <Switch>
-            <Route path="/checkout" component={Checkout}/>
-            <Route path="/orders" component={Orders}/>
-            <Route path="/auth" component={Auth}/>
-            <Route path="/logout" component={Logout}/>
-            <Route path="/" exact component={BurgerBuilder}/>
-          </Switch>
-          {/* {this.state.show ? <BurgerBuilder /> : null} */}
-          {/* <BurgerBuilder /> */}
-          {/* <Checkout /> */}
+        <Switch>
+          <Route path="/auth" component={Auth}/>
+          <Route path="/" exact component={BurgerBuilder}/>
+          <Route path="/checkout" component={Checkout}/>
+          { this.props.token ? <Route path="/orders" component={Orders}/> : null }
+          { this.props.token ? <Route path="/logout" component={Logout}/> : null }
+          <Redirect to="/" />
+        </Switch>
         </Layout>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token,
+  }
+}
 const mapDispatchToProps = dispatch => {
   return {
     autoSign: () => dispatch(actions.authCheckState())
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
