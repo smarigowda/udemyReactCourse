@@ -1,11 +1,13 @@
 @startuml
 alt not signed in
+"Home (not signed)" --> "Home (not signed)" : "browser refresh"
 "Home (not signed)" --> "Sign In Page" : "click on 'Sign In to Order'"
 "Sign In Page" --> "Checkout Page (signed)" : "Sign in Success"
 "Checkout Page (signed)" ---> "Checkout Page (signed) + Contact Data Form" : " Click on Continue"
 "Checkout Page (signed) + Contact Data Form" ---> "Home (signed)" : "Fill in details and Click on Order"
 end
 alt signed in
+"Home (signed)" --> "Home (signed)" : "browser refresh"
 "Home (signed)" --> "Order Details Modal" : "Click on Order Now"
 "Order Details Modal" ---> "Checkout Page (signed)" : "Click on Continue"
 end
