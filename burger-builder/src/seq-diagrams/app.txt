@@ -1,8 +1,12 @@
 @startuml
-"Home (not signed)" --> "Sign In" : "Sign In"
+"Home (not signed)" --> "Sign In Page" : "Click on Sign In to Order"
+"Sign In Page" --> "Checkout Page (signed)" : "Sign in Success"
 "Home (signed)" --> "Order Details Modal" : "Click on Order Now"
 "Order Details Modal" ---> "Home (signed)" : "Click on Cancel"
 "Order Details Modal" ---> "Checkout Page (signed)" : "Click on Continue"
 "Checkout Page (signed)" ---> "Checkout Page (signed) + Contact Data Form" : " Click on Continue"
 "Checkout Page (signed) + Contact Data Form" ---> "Home (signed)" : "Fill in details and Click on Order"
+"Checkout Page (signed)" ---> "Home (not signed)": "Click on Logout"
+"Checkout Page (signed)" ---> "Home (signed)" : "Click on Home (Burger Builder) -- ingredients are reset (issue)"
+"Home (signed)" --> "Home (not signed)" : "Click on Logout"
 @enduml
