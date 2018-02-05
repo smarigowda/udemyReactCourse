@@ -22,17 +22,30 @@ class App extends Component {
     this.props.autoSign();
   }
   render() {
+    let routes = (
+      <Switch>
+        <Route path="/auth" component={Auth}/>
+        <Route path="/" exact component={BurgerBuilder}/>
+        <Redirect to="/" />
+      </Switch>
+    );
+
+    if (this.props.token) {
+      routes = (
+        <Switch>
+        <Route path="/auth" component={Auth}/>
+        <Route path="/" exact component={BurgerBuilder}/>
+        <Route path="/checkout" component={Checkout}/>
+        <Route path="/orders" component={Orders}/>
+        <Route path="/logout" component={Logout}/>
+        <Redirect to="/" />
+      </Switch>
+      );
+    }
     return (
       <div>
         <Layout>
-        <Switch>
-          <Route path="/auth" component={Auth}/>
-          <Route path="/" exact component={BurgerBuilder}/>
-          <Route path="/checkout" component={Checkout}/>
-          { this.props.token ? <Route path="/orders" component={Orders}/> : null }
-          { this.props.token ? <Route path="/logout" component={Logout}/> : null }
-          <Redirect to="/" />
-        </Switch>
+          {routes}
         </Layout>
       </div>
     );

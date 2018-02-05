@@ -23,7 +23,6 @@ export const authFail = error => {
 }
 
 export const logout = () => {
-  debugger;
   localStorage.removeItem('token');
   localStorage.removeItem('expirationDate');
   localStorage.removeItem('userId');
@@ -35,7 +34,6 @@ export const logout = () => {
 export const checkAuthTimeout = expiresIn => {
   return dispatch => {
     setTimeout(() => {
-      debugger;
       dispatch(logout());
     }, +expiresIn * 1000)
   }
@@ -66,7 +64,6 @@ export const auth = (email, password, isSignUp) => {
       localStorage.setItem('expirationDate', expirationDate);
       localStorage.setItem('userId', response.data.localId);
       dispatch(authSuccess(response.data.idToken, response.data.localId));
-      debugger;
       dispatch(checkAuthTimeout(response.data.expiresIn));
     })
     .catch(error => {
@@ -88,19 +85,15 @@ export const authCheckState = () => {
   return dispatch => {
     const token = localStorage.getItem('token');
     if (!token) {
-      debugger;
       dispatch(logout());
     } else {
       const expirationDate = new Date(localStorage.getItem('expirationDate'));
       if(expirationDate > new Date()) {
         const userId = localStorage.getItem('userId');
-        dispatch(authSuccess(token));
+        dispatch(authSuccess(token, userId));
         const expiresIn = (expirationDate.getTime() - new Date().getTime()) / 1000;
-        debugger;
         dispatch(checkAuthTimeout(expiresIn));
-        debugger;
       } else {
-        debugger;
         dispatch(logout());
       }
     }
