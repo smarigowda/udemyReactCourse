@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from '../../axios-orders';
 
@@ -11,7 +11,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions';
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
   // UI only state, no need to manage them by redux
   state = {
     purchasing: false,
@@ -31,7 +31,7 @@ class BurgerBuilder extends Component {
     }
   }
   purchaseCancelHandler = () => {
-    this.setState({purchasing: false});
+    this.setState({ purchasing: false });
   }
   purchaseContinueHandler = () => {
     this.props.onInitPurchase();
@@ -46,7 +46,7 @@ class BurgerBuilder extends Component {
       .reduce((sum, el) => sum + el, 0);
     return sum > 0;
   }
-render() {
+  render() {
     const disabledInfo = {
       ...this.props.ingredients
     }
@@ -54,11 +54,11 @@ render() {
       disabledInfo[key] = disabledInfo[key] <= 0;
     }
     let orderSummary = null;
-    let burger = this.props.error ? <p>Ingredients can not be loaded</p> : <Spinner/>;
+    let burger = this.props.error ? <p>Ingredients can not be loaded</p> : <Spinner />;
     if (this.props.ingredients) {
       burger = (
         <Aux>
-          <Burger ingredients={this.props.ingredients}/>
+          <Burger ingredients={this.props.ingredients} />
           <BuildControls
             ingredientAdded={this.props.onIngredientAdded}
             ingredientsRemoved={this.props.onIngredientRemoved}
@@ -73,10 +73,10 @@ render() {
         ingredients={this.props.ingredients}
         purchaseCancelled={this.purchaseCancelHandler}
         purchaseContinued={this.purchaseContinueHandler}
-        price={this.props.totalPrice}/>;  
+        price={this.props.totalPrice} />;
     }
     if (this.state.loading) {
-      orderSummary = <Spinner/>;
+      orderSummary = <Spinner />;
     }
     return (
       <Aux>
