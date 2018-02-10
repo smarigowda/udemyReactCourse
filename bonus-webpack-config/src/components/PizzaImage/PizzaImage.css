@@ -1,4 +1,4 @@
-PizzaImage {
+.PizzaImage {
   width: 80%;
   height: 300px;
   margin: 20px auto;
@@ -6,6 +6,6 @@ PizzaImage {
 }
 
 .PizzaImg {
-  max-width: 100%;
+  /* max-width: 100%; */
   max-height: 100%;
 }
