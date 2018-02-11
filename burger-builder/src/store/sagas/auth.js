@@ -9,12 +9,10 @@ export function* logoutSaga(action) {
   yield localStorage.removeItem('userId');
   yield put(actions.logoutSucced());
 }
-
 export function* checkAuthTimeoutSaga(action) {
   yield delay(action.expirationTime * 1000);
   yield put(actions.logout());
 }
-
 export function* authUserSaga(action) {
   yield put(actions.authStart());
   const authData = {
@@ -45,7 +43,6 @@ export function* authUserSaga(action) {
       yield put(action.authFail(error.response.data.error));
   }
 }
-
 export function* authCheckStateSaga(action) {
   const token = localStorage.getItem('token');
     if (!token) {
