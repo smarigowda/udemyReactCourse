@@ -23,21 +23,10 @@ export const purchaseBurgerStart = () => {
 }
 
 export const purchaseBurger = (orderData, token) => {
-  return dispatch => {
-    dispatch(purchaseBurgerStart());
-    console.log(orderData);
-    axios.post('/orders.json?auth=' + token, orderData)
-    // axios.post('/orders', orderData) // error scenario
-    .then(response => {
-      console.log(response);
-      dispatch(purchaseBurgerSuccess(response.data.name, orderData))
-      // this.setState({loading: false});
-      // this.props.history.push('/');
-    }).catch(error => {
-      // this.setState({loading: false});
-      console.log(error);
-      dispatch(purchaseBurgerFail(error));
-    });
+  return {
+    type: actionTypes.PURCHASE_BURGER,
+    token,
+    orderData
   }
 }
 

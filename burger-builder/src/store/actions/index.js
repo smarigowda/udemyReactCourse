@@ -11,7 +11,10 @@ export * from './actionTypes';
 export { 
   purchaseBurger,
   purchaseInit,
-  fetchOrders } from './order';
+  fetchOrders,
+  purchaseBurgerStart,
+  purchaseBurgerSuccess,
+  purchaseBurgerFail } from './order';
 
 export {
   auth,
