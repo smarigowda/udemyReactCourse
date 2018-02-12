@@ -1,5 +1,7 @@
 @startuml
 alt not signed in
 "Home (not signed)" --> "Home (not signed)" : "browser refresh"
+"Home (not signed)" --> "Menu Page" : "click on menu"
+"Menu Page" --> "Filtered Menu Page" : "select a filter"
 end
 @enduml
