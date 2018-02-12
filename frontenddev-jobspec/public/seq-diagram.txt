@@ -1,0 +1,5 @@
+@startuml
+alt not signed in
+"Home (not signed)" --> "Home (not signed)" : "browser refresh"
+end
+@enduml
