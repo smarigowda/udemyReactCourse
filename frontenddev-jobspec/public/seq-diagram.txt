@@ -1,7 +1,31 @@
 @startuml
-alt not signed in
-"Home (not signed)" --> "Home (not signed)" : "browser refresh"
-"Home (not signed)" --> "Menu Page" : "click on menu"
-"Menu Page" --> "Filtered Menu Page" : "select a filter"
+alt home page
+skinparam sequenceMessageAlign center
+"Home" --> "Home" : browser refresh
+"Home" --> "Home" : sign in / sign up
+end
+
+alt menu page
+"Home" --> "Menu Page" : click on menu
+"Firebase/Firestore/Mongo" --> "Menu Page": fetch menu details
+"Menu Page" --> "Menu Page" : select a menu
+note right of "Menu Page": ex: Starters, Soups, Poultry, \nPork, Lamb, Beef, Veg, Rice, \nNoodle, Thai, Sides, Dessert, \nDrink, Lunch Time Special etc...
+"Menu Page" --> "Menu Page" : add an item to cart
+note right of "Menu Page": Shopping cart displayed
+"Menu Page" --> "Menu Page" : minimum order reached/ exceeded
+note right of "Menu Page": Checkout Button Enabled
+end
+
+alt checkout page
+"Menu Page" --> "Checkout Page": click on Checkout button
+"Checkout Page" --> "Sign In/ Sign Up Page": click on Sign In
+"Sign In/ Sign Up Page" --> "Checkout Page": sign in/ signup
+note right of "Checkout Page": 1. Customer information\n2. Delivery Details \n3. Payment Information\n4. Confirm Order
+"Checkout Page" --> "Payment Gateway": verify payment
+"Payment Gateway" --> "Checkout Page": success/ fail response
+"Checkout Page" --> "Order Summary": <font color=green> payment success
+"Checkout Page" --> "Payment Failure": <font color=red> payment failed
+"Checkout Page" --> "Firebase/Firestore/Mongo": <font color=green> payment success
+"Checkout Page" --> "e-mail/ text": <font color=green> payment success
 end
 @enduml
